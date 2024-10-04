@@ -654,7 +654,7 @@ function App() {
                 <div className="main-container scroll">
                   <div className="box-portfolio">
                     <span className="bold">پروژه اول</span>
-                    <img src="./assets/img/Project 6.png" alt="Project of Kourosh Salmanzadeh" />
+                    <img src="./assets/img/project 6.png" alt="Project of Kourosh Salmanzadeh" />
                     <a href="https://kouroshsalmanzadeh.github.io/Golden-Coffee/" target="_blank"
                       rel="noopener noreferrer">مشاهده پروژه</a>
                   </div>

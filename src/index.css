@@ -4,12 +4,12 @@
 
 @font-face {
     font-family: 'dana';
-    src: url(./assets/fonts/Dana/woff2/DanaFaNum-Regular.woff2) format(woff2);
+    src: url(public/assets/fonts/Dana/woff2/DanaFaNum-Regular.woff2) format(woff2);
 }
 
 @font-face {
     font-family: 'morabba';
-    src: url(./assets/fonts/Morabba/woff2/Morabba-Light.woff2) format(woff2);
+    src: url(public/assets/fonts/Morabba/woff2/Morabba-Light.woff2) format(woff2);
 }
 
 body {
