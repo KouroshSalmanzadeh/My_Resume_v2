@@ -264,7 +264,7 @@ function App() {
 
 
   window.addEventListener("resize", () => { location.reload() });
-  
+
   return (
     <>
       <div className="loader">
@@ -282,7 +282,7 @@ function App() {
         </svg>
         <strong className="green-color">به رزومه من خوش آمدید</strong>
         <div className="description">
-          <img src="src/assets/img/Kourosh.jpg" alt="Kourosh Salmanzadeh" />
+          <img src="assets/img/Kourosh.jpg" alt="Kourosh Salmanzadeh" />
           <span>
             کوروش سلمان زاده هستم
             <br />
@@ -314,7 +314,7 @@ function App() {
 
           {/* <!-- about me --> */}
           <div className="main-about-me reveal-left" id="about-me">
-            <img src="src/assets/img/Kourosh.jpg" alt="Kourosh Salmanzadeh" />
+            <img src="assets/img/Kourosh.jpg" alt="Kourosh Salmanzadeh" />
             <div className="info">
               <ul>
                 <li><span className="green-color bold title">نام:</span><span className="answer">کوروش</span></li>
@@ -549,7 +549,7 @@ function App() {
             </div>
           </div>
           <div className="img-about-me">
-            <img className="reveal-top" src="src/assets/img/about_me.png" alt="about me (KouroshSalmanzadeh)" />
+            <img className="reveal-top" src="assets/img/about_me.png" alt="about me (KouroshSalmanzadeh)" />
           </div>
           <div className="skills" id="skills">
             <div className="title-session bold reveal-right">
@@ -654,31 +654,31 @@ function App() {
                 <div className="main-container scroll">
                   <div className="box-portfolio">
                     <span className="bold">پروژه اول</span>
-                    <img src="src/assets/img/Project 6.png" alt="Project of Kourosh Salmanzadeh" />
+                    <img src="assets/img/Project 6.png" alt="Project of Kourosh Salmanzadeh" />
                     <a href="https://kouroshsalmanzadeh.github.io/Golden-Coffee/" target="_blank"
                       rel="noopener noreferrer">مشاهده پروژه</a>
                   </div>
                   <div className="box-portfolio">
                     <span className="bold">پروژه دوم</span>
-                    <img src="src/assets/img/Project 2.png" alt="Project of Kourosh Salmanzadeh" />
+                    <img src="assets/img/Project 2.png" alt="Project of Kourosh Salmanzadeh" />
                     <a href="https://kouroshsalmanzadeh.github.io/second-project_find-jobs/" target="_blank"
                       rel="noopener noreferrer">مشاهده پروژه</a>
                   </div>
                   <div className="box-portfolio">
                     <span className="bold">پروژه سوم</span>
-                    <img src="src/assets/img/Project 3.png" alt="Project of Kourosh Salmanzadeh" />
+                    <img src="assets/img/Project 3.png" alt="Project of Kourosh Salmanzadeh" />
                     <a href="https://kouroshsalmanzadeh.github.io/ClockAlarm/" target="_blank"
                       rel="noopener noreferrer">مشاهده پروژه</a>
                   </div>
                   <div className="box-portfolio">
                     <span className="bold">پروژه چهارم</span>
-                    <img src="src/assets/img/Project 4.png" alt="Project of Kourosh Salmanzadeh" />
+                    <img src="assets/img/Project 4.png" alt="Project of Kourosh Salmanzadeh" />
                     <a href="https://kouroshsalmanzadeh.github.io/ToDoList-better-/" target="_blank"
                       rel="noopener noreferrer">مشاهده پروژه</a>
                   </div>
                   <div className="box-portfolio">
                     <span className="bold">پروژه پنجم</span>
-                    <img src="src/assets/img/Project 1.png" alt="Project of Kourosh Salmanzadeh" />
+                    <img src="assets/img/Project 1.png" alt="Project of Kourosh Salmanzadeh" />
                     <a href="https://kouroshsalmanzadeh.github.io/first-project_hacking-site/" target="_blank"
                       rel="noopener noreferrer">مشاهده پروژه</a>
                   </div>
@@ -739,8 +739,8 @@ function App() {
           </div>
 
           {/* <!-- halftone patterns --> */}
-          <img className="halftone1" src="src/assets/img/halftone 1.png" />
-          <img className="halftone3" src="src/assets/img/halftone 3.png" />
+          <img className="halftone1" src="assets/img/halftone 1.png" />
+          <img className="halftone3" src="assets/img/halftone 3.png" />
         </header>
       </main>
 
@@ -755,7 +755,7 @@ function App() {
       </footer>
 
       <div className="alert-landscape">
-        <img src="src/assets/img/tilt-your-phone-turn-your-phone.gif" />
+        <img src="assets/img/tilt-your-phone-turn-your-phone.gif" />
       </div>
     </>
   )
