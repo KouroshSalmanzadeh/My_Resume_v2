@@ -264,8 +264,7 @@ function App() {
 
 
   window.addEventListener("resize", () => { location.reload() });
-
-
+  
   return (
     <>
       <div className="loader">
