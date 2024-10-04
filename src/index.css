@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'dana';
+    src: url(./assets/fonts/Dana/woff2/DanaFaNum-Regular.woff2) format(woff2);
+}
+
+@font-face {
+    font-family: 'morabba';
+    src: url(./assets/fonts/Morabba/woff2/Morabba-Light.woff2) format(woff2);
+}
+
+body {
+    direction: rtl;
+    font-family: 'dana';
+}
+
+:root {
+    --green-color: #1ffa93;
+    --grey-color: #222222;
+    --white-color: #ffffff;
+}
