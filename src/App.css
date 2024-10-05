@@ -255,65 +255,6 @@ aside {
     background-color: #222222;
 }
 
-/* ---- background pattern ---- */
-canvas {
-    display: block;
-    width: 105%;
-    height: 50%;
-}
-
-/* ---- particles.js container ---- */
-#particles-js {
-    width: 100%;
-    height: 100%;
-    background-color: #222222;
-    background-image: url("");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
-}
-
-/* ---- stats.js ---- */
-.count-particles {
-    background: #000022;
-    position: absolute;
-    top: 48px;
-    left: 0;
-    width: 80px;
-    color: #13E8E9;
-    font-size: .8em;
-    text-align: left;
-    text-indent: 4px;
-    line-height: 14px;
-    padding-bottom: 2px;
-    font-family: Helvetica, Arial, sans-serif;
-    font-weight: bold;
-}
-
-.js-count-particles {
-    font-size: 1.1em;
-}
-
-#stats,
-.count-particles {
-    -webkit-user-select: none;
-    user-select: none;
-    /* Define the standard property for compatibility */
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-top: 5px;
-    margin-left: 5px;
-}
-
-#stats {
-    border-radius: 3px 3px 0 0;
-    overflow: hidden;
-}
-
-.count-particles {
-    border-radius: 0 0 3px 3px;
-}
-
 /* ---content header--- */
 header .title {
     margin-top: 10rem;
@@ -452,6 +393,7 @@ nav ul li.active::after {
     width: var(--border-radius);
     height: var(--border-radius);
     left: 0;
+    transition: all ease .3s;
 }
 
 nav ul li.active::before {
@@ -492,7 +434,7 @@ nav ul li.active a::before {
 
 .title-menu {
     position: fixed;
-    top: -4.5rem;
+    top: -5.5rem;
     text-align: center;
     line-height: 10rem;
     width: 40%;
@@ -509,7 +451,7 @@ nav ul li.active a::before {
 }
 
 .hide-title-menu {
-    top: -9rem;
+    top: -8rem;
     opacity: 0;
     visibility: hidden;
     transition: all ease .3s;
@@ -521,12 +463,12 @@ nav ul li.active a::before {
 
 .title-menu h1 {
     color: var(--green-color);
-    width: 12vw;
+    width: 14vw;
     height: 9vw;
     font-size: 2vw;
     background: #00000063;
     backdrop-filter: blur(5px);
-    padding: 2rem 0.5rem 1rem;
+    padding: 2.5rem 0.5rem 1rem;
     border-radius: 50%;
 }
 
@@ -1057,26 +999,34 @@ nav ul li.active a::before {
 
 .skills .main-box-skills {
     width: 100%;
-    height: auto;
+    height: 15vw;
     margin-top: 1vw;
     border-radius: 2rem;
     border: 2px solid #d8d8d8a3;
     background: #d8d8d836;
     padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     transition: all ease 0.5s;
+    @apply flex flex-wrap justify-center items-start cursor-pointer overflow-hidden;
+
+    div:first-child {
+        @apply flex flex-wrap justify-center cursor-pointer;
+    }
+
+    &.active {
+        height: 50vw;
+
+        svg {
+            @apply rotate-180 animate-none bottom-2;
+            color: var(--green-color);
+        }
+    }
 }
 
 .skills .main-box-skills .box-skills {
-    width: 100%;
-    height: 2.1vw;
     position: relative;
     padding: 0.5vw 1vw;
-    margin: 0.5vw;
+    margin: 0.7vw;
     border-radius: 1rem;
-    cursor: pointer;
     background: linear-gradient(45deg, #ffffff, #d8d8d8);
     box-shadow: 0px 5px 20px -10px black;
     display: flex;
@@ -1084,171 +1034,38 @@ nav ul li.active a::before {
     align-items: flex-end;
     overflow: hidden;
     transition: all ease 0.5s;
-}
+    @apply flex flex-col items-center justify-center gap-2;
 
-.skills .main-box-skills .box-skills:nth-child(2).active-sub-box {
-    height: 14vw;
-    transition: all ease 1s;
-}
-
-.skills .main-box-skills .box-skills:nth-child(3).active-sub-box,
-.skills .main-box-skills .box-skills:nth-child(4).active-sub-box {
-    height: 4vw;
-    transition: all ease 1s;
-}
-
-.skills .main-box-skills .box-skills .skill {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-between;
-
-    span.arrow {
-        position: absolute;
-        right: 0.3rem;
-        top: 0.5vw;
-
-        &::before,
-        &::after {
-            content: '';
-            position: absolute;
-            width: 0.5vw;
-            height: 0.2vw;
-            background: rgb(46, 46, 46);
-            border-radius: 100vw;
-        }
-
-        &::before {
-            transform: rotate(135deg);
-            right: -0.3vw;
-        }
-
-        &::after {
-            transform: rotate(45deg);
-        }
+    img {
+        @apply w-36 aspect-square;
     }
 }
 
-.skills .main-box-skills .box-skills.disabled {
-    cursor: auto;
-
-    span.arrow {
-
-        &::before,
-        &::after {
-            background: rgb(129, 129, 129);
-        }
-    }
+.skills .main-box-skills .box-skills:nth-child(4),
+.skills .main-box-skills .box-skills:nth-child(5),
+.skills .main-box-skills .box-skills:nth-child(6),
+.skills .main-box-skills .box-skills:nth-child(7),
+.skills .main-box-skills .box-skills:nth-child(8),
+.skills .main-box-skills .box-skills:nth-child(9),
+.skills .main-box-skills .box-skills:nth-child(10),
+.skills .main-box-skills .box-skills:nth-child(11),
+.skills .main-box-skills .box-skills:nth-child(12) {
+    @apply hidden;
 }
 
-.progress-bar {
-    position: relative;
-    width: 87%;
-    height: 0.6vw;
-    background: white;
-    border: 1px solid #c6c6c6;
-    border-radius: 100vw;
-    margin-right: 1.5rem;
-    transition: all ease 0.3s;
-
-    &::before {
-        position: absolute;
-        content: '';
-        left: 0;
-        width: 0;
-        height: 100%;
-        border-radius: 100vw;
-        background: linear-gradient(45deg, var(--grey-color), var(--green-color));
-    }
-}
-
-.skills .main-box-skills .box-skills .sub-skills {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-
-    .skill {
-        padding: 0.5rem;
-
-        .progress-bar {
-            width: 75%;
-            height: 0.5vw;
-
-            &::before {
-                background: linear-gradient(45deg, var(--green-color), var(--grey-color));
-            }
-        }
-
-        span.bold {
-            font-size: .8vw;
-        }
-    }
+.skills .main-box-skills.active .box-skills:nth-child(4),
+.skills .main-box-skills.active .box-skills:nth-child(5),
+.skills .main-box-skills.active .box-skills:nth-child(6),
+.skills .main-box-skills.active .box-skills:nth-child(7),
+.skills .main-box-skills.active .box-skills:nth-child(8),
+.skills .main-box-skills.active .box-skills:nth-child(9),
+.skills .main-box-skills.active .box-skills:nth-child(10),
+.skills .main-box-skills.active .box-skills:nth-child(11),
+.skills .main-box-skills.active .box-skills:nth-child(12) {
+    @apply flex;
 }
 
 
-/* progress bar of main skills */
-.skills .main-box-skills .box-skills .sub-skills .progress-bar::before {
-    width: 0 !important;
-}
-
-.skills .main-box-skills.active-top .box-skills:nth-child(1) .progress-bar::before {
-    width: 95%;
-    transition: all ease 0.3s;
-    transition-delay: 0.3s;
-}
-
-.skills .main-box-skills.active-top .box-skills:nth-child(2) .progress-bar::before {
-    width: 85%;
-    transition: all ease 0.3s;
-    transition-delay: 0.5s;
-}
-
-.skills .main-box-skills.active-top .box-skills:nth-child(3) .progress-bar::before {
-    width: 90%;
-    transition: all ease 0.3s;
-    transition-delay: 0.7s;
-}
-
-.skills .main-box-skills.active-top .box-skills:nth-child(4) .progress-bar::before {
-    width: 90%;
-    transition: all ease 0.3s;
-    transition-delay: 0.9s;
-}
-
-/* progress bar of frameworks and libraries (sub skill's progres bar) */
-.skills .main-box-skills .box-skills.active-sub-box:nth-child(2) .sub-skills .skill:nth-child(1) .progress-bar::before {
-    width: 60% !important;
-}
-
-.skills .main-box-skills .box-skills.active-sub-box:nth-child(2) .sub-skills .skill:nth-child(2) .progress-bar::before {
-    width: 80% !important;
-}
-
-.skills .main-box-skills .box-skills.active-sub-box:nth-child(2) .sub-skills .skill:nth-child(3) .progress-bar::before {
-    width: 100% !important;
-}
-
-.skills .main-box-skills .box-skills.active-sub-box:nth-child(2) .sub-skills .skill:nth-child(4) .progress-bar::before {
-    width: 100% !important;
-}
-
-.skills .main-box-skills .box-skills.active-sub-box:nth-child(2) .sub-skills .skill:nth-child(5) .progress-bar::before {
-    width: 95% !important;
-}
-
-.skills .main-box-skills .box-skills.active-sub-box:nth-child(2) .sub-skills .skill:nth-child(6) .progress-bar::before {
-    width: 85% !important;
-}
-
-.skills .main-box-skills .box-skills.active-sub-box:nth-child(3) .sub-skills .skill:nth-child(1) .progress-bar::before {
-    width: 80% !important;
-}
-
-.skills .main-box-skills .box-skills.active-sub-box:nth-child(4) .sub-skills .skill:nth-child(1) .progress-bar::before {
-    width: 85% !important;
-}
 
 /* skills description */
 aside .skills-description {

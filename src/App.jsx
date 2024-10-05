@@ -1,5 +1,7 @@
 import './App.css'
-import { useEffect} from "react";
+import { useEffect, useRef, useState} from "react";
+import FirstTitle from './components/First Title/FirstTitle';
+import SecondTitle from './components/Second Title/SecondTitle';
 function App() {
 
   /////// reveal and active elements \\\\\\\
@@ -110,7 +112,9 @@ function App() {
     const titleNav = document.querySelector('.title-menu');
     const titleNavH1 = document.querySelector('.title-menu h1');
     const activeli = document.querySelector('nav ul li.active');
+    
     if (ev.type == 'click') {
+      let observerActive = true;
       const navli = ev.currentTarget.parentElement;
 
       if (ev.target.innerText !== titleNavH1.innerText) {
@@ -147,25 +151,25 @@ function App() {
           thisLi = document.querySelector('.about-me-li');
           thisLi.classList.add('active');
           titleNavH1.innerText = thisLi.innerText;
-          titleMenu.classList.remove('hide-title-menu');
+          titleNav.classList.remove('hide-title-menu');
           break;
         case 'skills':
           thisLi = document.querySelector('.skills-li');
           thisLi.classList.add('active');
           titleNavH1.innerText = thisLi.innerText;
-          titleMenu.classList.remove('hide-title-menu');
+          titleNav.classList.remove('hide-title-menu');
           break;
         case 'portfolio':
           thisLi = document.querySelector('.portfolio-li');
           thisLi.classList.add('active');
           titleNavH1.innerText = thisLi.innerText;
-          titleMenu.classList.remove('hide-title-menu');
+          titleNav.classList.remove('hide-title-menu');
           break;
         case 'contact-me':
           thisLi = document.querySelector('.contact-me-li');
           thisLi.classList.add('active');
           titleNavH1.innerText = thisLi.innerText;
-          titleMenu.classList.remove('hide-title-menu');
+          titleNav.classList.remove('hide-title-menu');
           break;
 
         default:
@@ -219,48 +223,47 @@ function App() {
 
 
   function openBoxSkills (e) {
-    const box = e.currentTarget;
-    if (box.classList.contains("active-sub-box")) {
-      box.classList.remove('active-sub-box');
+    const mainBox = e.currentTarget;
+    if (mainBox.classList.contains("active")) {
+      mainBox.classList.remove('active');
       
     } else {
-      box.classList.add('active-sub-box');
+      mainBox.classList.add('active');
     }
   }
 
+  const titleMenuRef = useRef(null);
+  const aboutMeRef = useRef(null);
+  const skillsRef = useRef(null);
+  const portfolioRef = useRef(null);
+  const contactMeRef = useRef(null);
 
-  /////// change li menu when scroll \\\\\\\
-  // انتخاب المان منو
-  const menu = document.querySelector('.nav-list');
-  // let observerActive = true;
-
-  // تعریف تنظیمات برای IntersectionObserver
-  // const observerOptions = {
-  //   root: null, // null به معنای مشاهده فریم مرورگر است
-  //   rootMargin: '0px', // حاشیه اضافی اضافه شده به حاشیه مشاهده‌کننده
-  //   threshold: 0.5 // نسبت المان مشاهده شده به کل المان
-  // };
-
-  // تعریف مشاهده‌کننده
-  // const observer = new IntersectionObserver((entries, observer) => {
-  //   if (!observerActive) return;
-  //   entries.forEach(entry => {
-  //     // اگر المان وارد شده مشاهده شده باشد
-  //     if (entry.isIntersecting) {
-  //       selectMenu(entry);
-  //     }
-  //   })
-  // }, observerOptions);
-
-  // اعمال مشاهده‌کننده بر روی المنو
-  // const about_me = document.querySelector('#about-me');
-  // const skills = document.querySelector('#skills');
-  // const portfolio = document.querySelector('#portfolio');
-  // const contactMe = document.querySelector('#contact-me');
-  // observer.observe(about_me);
-  // observer.observe(skills);
-  // observer.observe(portfolio);
-  // observer.observe(contactMe);
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5,
+    };
+  
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          const sectionText = entry.target.querySelector('h1, h2, span').textContent;
+          titleMenuRef.current.textContent = sectionText;
+        }
+      });
+    }, observerOptions);
+  
+    if (aboutMeRef.current) observer.observe(aboutMeRef.current);
+    if (skillsRef.current) observer.observe(skillsRef.current);
+    if (portfolioRef.current) observer.observe(portfolioRef.current);
+    if (contactMeRef.current) observer.observe(contactMeRef.current);
+  
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
 
   window.addEventListener("resize", () => { location.reload() });
@@ -309,11 +312,12 @@ function App() {
             </ul>
           </nav>
           <div className="title-menu">
-            <h1>خانه</h1>
+            <h1 ref={titleMenuRef}>خانه</h1>
           </div>
 
           {/* <!-- about me --> */}
-          <div className="main-about-me reveal-left" id="about-me">
+          <div className="main-about-me reveal-left" id="about-me" ref={aboutMeRef}>
+            <h1 className="title hidden">درباره من</h1>
             <img src="./assets/img/Kourosh.jpg" alt="Kourosh Salmanzadeh" />
             <div className="info">
               <ul>
@@ -551,104 +555,82 @@ function App() {
           <div className="img-about-me">
             <img className="reveal-top" src="./assets/img/about_me.png" alt="about me (KouroshSalmanzadeh)" />
           </div>
-          <div className="skills" id="skills">
-            <div className="title-session bold reveal-right">
-              <div className="container">
-                <span>مهارت های من</span>
-              </div>
-            </div>
-
-            <div className="second-title reveal-left">
-              <div className="container">
-                <span>برنامه نویسی</span>
-              </div>
-            </div>
+          <div className="skills" id="skills" ref={skillsRef}>
+            <FirstTitle title="مهارت های من" />
+            <SecondTitle title="برنامه نویسی" />
             <div className="container">
-              <div className="main-box-skills reveal-top">
+              <div className="main-box-skills reveal-top" onClick={openBoxSkills}>
+                <div>
 
-                <div className="box-skills disabled">
-                  <div className="skill">
-                    <span className="bold">HTML</span>
-                    <div className="progress-bar"></div>
-                    <span className="arrow"></span>
+                  <div className="box-skills">
+                      <img src='./assets/img/icons8-html.svg' />
+                      <span className="bold">HTML</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/icons8-css.svg' />
+                      <span className="bold">CSS</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/tailwind-css.svg' />
+                      <span className="bold">Tailwind</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/icons8-javascript.svg' />
+                      <span className="bold">JavaScript</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/icons8-react-native.svg' />
+                      <span className="bold">React</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/redux.svg' />
+                      <span className="bold">Redux</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/nextjs-icon-svgrepo-com.svg' />
+                      <span className="bold">Next.js</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/vite-svgrepo-com.svg' />
+                      <span className="bold">Vite</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/git-icon-logo-svgrepo-com.svg' />
+                      <span className="bold">Git</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/github.svg' />
+                      <span className="bold">Github</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/postman-icon-svgrepo-com.svg' />
+                      <span className="bold">Postman</span>
+                  </div>
+
+                  <div className="box-skills">
+                      <img src='./assets/img/figma-svgrepo-com.svg' />
+                      <span className="bold">Figma</span>
                   </div>
                 </div>
-
-                <div className="box-skills" onClick={openBoxSkills}>
-                  <div className="skill">
-                    <span className="bold">CSS</span>
-                    <div className="progress-bar"></div>
-                    <span className="arrow"></span>
-                  </div>
-                  <div className="sub-skills">
-                    <div className="skill">
-                      <span className="bold">BootStrap <span className="green-color">css</span></span>
-                      <div className="progress-bar"></div>
-                    </div>
-                    <div className="skill">
-                      <span className="bold">Materialize <span className="green-color">css</span></span>
-                      <div className="progress-bar"></div>
-                    </div>
-                    <div className="skill">
-                      <span className="bold">TailWind <span className="green-color">css</span></span>
-                      <div className="progress-bar"></div>
-                    </div>
-                    <div className="skill">
-                      <span className="bold">FlexBox <span className="green-color">css</span></span>
-                      <div className="progress-bar"></div>
-                    </div>
-                    <div className="skill">
-                      <span className="bold">Grid <span className="green-color">css</span></span>
-                      <div className="progress-bar"></div>
-                    </div>
-                    <div className="skill">
-                      <span className="bold">Sass<span className="green-color">css</span></span>
-                      <div className="progress-bar"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="box-skills" onClick={openBoxSkills}>
-                  <div className="skill">
-                    <span className="bold">JS</span>
-                    <div className="progress-bar"></div>
-                    <span className="arrow"></span>
-                  </div>
-                  <div className="sub-skills">
-                    <div className="skill">
-                      <span className="bold">React <span className="green-color">.js</span></span>
-                      <div className="progress-bar"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="box-skills" onClick={openBoxSkills}>
-                  <div className="skill">
-                    <span className="bold">Git</span>
-                    <div className="progress-bar"></div>
-                    <span className="arrow"></span>
-                  </div>
-                  <div className="sub-skills">
-                    <div className="skill">
-                      <span className="bold"><span className="green-color">Git</span>hub</span>
-                      <div className="progress-bar"></div>
-                    </div>
-                  </div>
-                </div>
+                <svg className='w-10 h-10 animate-bounce mt-4 absolute bottom-0' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor" version="1.1" id="Layer_1" viewBox="0 0 330 330" xml:space="preserve">
+                  <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393  c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393  s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z" />
+                </svg>
               </div>
             </div>
           </div>
-          <div className="portfolio" id="portfolio">
-            <div className="title-session bold reveal-right">
-              <div className="container">
-                <span>پورتفولیو</span>
-              </div>
-            </div>
-            <div className="second-title reveal-left">
-              <div className="container">
-                <span>نمونه کار های من</span>
-              </div>
-            </div>
+          <div className="portfolio" id="portfolio" ref={portfolioRef}>
+            <FirstTitle title="پورتفولیو" />
+            <SecondTitle title="نمونه کار های من" />
             <div className="container">
               <div className="main-box-portfolio reveal-top">
                 <div className="main-container scroll">
@@ -686,17 +668,9 @@ function App() {
               </div>
             </div>
           </div>
-          <div className="contact-me" id="contact-me">
-            <div className="title-session bold reveal-right">
-              <div className="container">
-                <span>ارتباط با من</span>
-              </div>
-            </div>
-            <div className="second-title reveal-left">
-              <div className="container">
-                <span>ایمیل</span>
-              </div>
-            </div>
+          <div className="contact-me" id="contact-me" ref={contactMeRef}>
+            <FirstTitle title="ارتباط با من" />
+            <SecondTitle title="ایمیل" />
             <div className="container">
               <a className="reveal-top" href="mailto:kouroshsalmanzadeh@gmail.com" target="_blank">
                 ایمیل به من
