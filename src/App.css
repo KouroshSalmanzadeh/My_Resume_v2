@@ -1034,10 +1034,10 @@ nav ul li.active a::before {
     align-items: flex-end;
     overflow: hidden;
     transition: all ease 0.5s;
-    @apply flex flex-col items-center justify-center gap-2;
+    @apply flex flex-col items-center justify-center gap-1 xl:gap-2;
 
     img {
-        @apply w-36 aspect-square;
+        @apply w-12 xl:w-36 aspect-square;
     }
 }
 
